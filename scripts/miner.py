@@ -1,27 +1,31 @@
-from pydriller import Repository
 import pandas as pd
+from pydriller import Repository
+import os
 
-def collect_git_history(repo_path):
-    history = []
-    print(f"Extraction des données depuis {repo_path}...")
-    
-    # On parcourt les commits pour voir quels fichiers changent ensemble
+def mine_repository(repo_path='.'):
+    """Extrait les features des commits pour l'entraînement du ML."""
+    data = []
+    print(f"🚀 Analyse du dépôt : {repo_path}...")
+
     for commit in Repository(repo_path).traverse_commits():
         for file in commit.modified_files:
-            history.append({
-                'commit': commit.hash,
-                'date': commit.author_date,
-                'filename': file.filename,
-                'complexity': file.complexity,
-                'added': file.added_lines,
-                'removed': file.deleted_lines
-            })
-    
-    df = pd.DataFrame(history)
-    df.to_csv('data/git_history.csv', index=False)
-    print("Fichier data/git_history.csv généré.")
+            # On se concentre sur les fichiers de code
+            if file.filename.endswith(('.py', '.js', '.go', '.cpp')):
+                data.append({
+                    'hash': commit.hash,
+                    'author': commit.author.name,
+                    'date': commit.author_date,
+                    'file': file.filename,
+                    'added': file.added_lines,
+                    'removed': file.deleted_lines,
+                    'complexity': file.complexity # Feature clé pour le ML
+                })
+
+    df = pd.DataFrame(data)
+    # Sauvegarde dans le dossier data que vous avez créé
+    os.makedirs('data', exist_ok=True)
+    df.to_csv('data/features_dataset.csv', index=False)
+    print(f"✅ Dataset créé : {len(df)} lignes enregistrées dans data/features_dataset.csv")
 
 if __name__ == "__main__":
-    # Testez sur votre propre repo pour commencer
-    collect_git_history('.')
-
+    mine_repository()
