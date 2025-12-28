@@ -398,21 +398,125 @@ Project Structure
 
 ```
 predictive-test-selection/
+├── .github/
+│   └── workflows/
+│       ├── ci.yml              # Continuous Integration
+│       ├── release.yml         # Release automation
+│       └── codeql-analysis.yml # Security scanning
 ├── src/
-│   └── predictive_test_selection/
-│       ├── core/           # Core ML engine
-│       ├── models/         # ML model implementations
-│       ├── features/       # Feature extraction
-│       ├── integrations/   # CI/CD platform integrations
-│       ├── analytics/      # Cost and performance analytics
-│       └── api/           # REST API layer
-├── tests/
-│   ├── unit/              # Unit tests
-│   ├── integration/       # Integration tests
-│   └── performance/       # Performance tests
-├── examples/              # Example implementations
-├── deployments/           # Kubernetes, Docker configs
-└── docs/                  # Documentation
+│   └── pts/                    # Main Python package
+│       ├── __init__.py
+│       ├── core/               # Core ML engine
+│       │   ├── __init__.py
+│       │   ├── predictor.py    # ML prediction logic
+│       │   ├── trainer.py      # Model training
+│       │   └── evaluator.py    # Model evaluation
+│       ├── features/           # Feature engineering
+│       │   ├── __init__.py
+│       │   ├── extractor.py    # Feature extraction
+│       │   ├── engineer.py     # Feature engineering
+│       │   └── selector.py     # Feature selection
+│       ├── data/               # Data processing
+│       │   ├── __init__.py
+│       │   ├── collector.py    # Git data collection
+│       │   ├── processor.py    # Data processing
+│       │   └── validator.py    # Data validation
+│       ├── integrations/       # CI/CD integrations
+│       │   ├── __init__.py
+│       │   ├── github.py       # GitHub Actions
+│       │   ├── gitlab.py       # GitLab CI
+│       │   ├── jenkins.py      # Jenkins
+│       │   └── azure.py        # Azure DevOps
+│       ├── api/                # REST API
+│       │   ├── __init__.py
+│       │   ├── server.py       # FastAPI server
+│       │   ├── models.py       # Pydantic models
+│       │   └── routes.py       # API routes
+│       └── utils/              # Utilities
+│           ├── __init__.py
+│           ├── logger.py       # Logging configuration
+│           ├── metrics.py      # Monitoring metrics
+│           └── helpers.py      # Helper functions
+├── tests/                      # Test suite
+│   ├── __init__.py
+│   ├── unit/                   # Unit tests
+│   │   ├── test_core.py
+│   │   ├── test_features.py
+│   │   └── test_data.py
+│   ├── integration/            # Integration tests
+│   │   ├── test_api.py
+│   │   ├── test_integrations.py
+│   │   └── test_end_to_end.py
+│   └── fixtures/               # Test fixtures
+│       ├── sample_data.py
+│       └── mock_services.py
+├── scripts/                    # Utility scripts
+│   ├── miner.py               # Git history mining
+│   ├── train_model.py         # Model training script
+│   ├── predict.py             # Prediction script
+│   ├── evaluate.py            # Evaluation script
+│   └── deploy.py              # Deployment script
+├── configs/                    # Configuration files
+│   ├── model_config.yaml      # Model configuration
+│   ├── feature_config.yaml    # Feature configuration
+│   ├── api_config.yaml        # API configuration
+│   └── deployment/            # Deployment configs
+│       ├── docker/
+│       │   ├── Dockerfile
+│       │   └── docker-compose.yml
+│       └── kubernetes/
+│           ├── deployment.yaml
+│           ├── service.yaml
+│           └── ingress.yaml
+├── docs/                       # Documentation
+│   ├── index.md
+│   ├── getting_started.md
+│   ├── api_reference.md
+│   ├── deployment_guide.md
+│   └── contributing.md
+├── examples/                   # Example usage
+│   ├── github_actions/
+│   │   ├── basic.yml
+│   │   └── advanced.yml
+│   ├── gitlab_ci/
+│   │   └── .gitlab-ci.yml
+│   └── jenkins/
+│       └── Jenkinsfile
+├── data/                       # Data directory
+│   ├── raw/                   # Raw data
+│   ├── processed/             # Processed data
+│   ├── features/              # Feature data
+│   └── models/                # Saved models
+├── models/                     # ML models
+│   ├── __init__.py
+│   ├── xgboost/               # XGBoost models
+│   ├── random_forest/         # Random Forest models
+│   └── ensemble/              # Ensemble models
+├── notebooks/                  # Jupyter notebooks
+│   ├── 01_data_exploration.ipynb
+│   ├── 02_feature_engineering.ipynb
+│   ├── 03_model_training.ipynb
+│   └── 04_evaluation.ipynb
+├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.md
+│   │   └── feature_request.md
+│   ├── PULL_REQUEST_TEMPLATE.md
+│   └── workflows/             # GitHub Actions workflows
+│       ├── ci.yml
+│       ├── release.yml
+│       └── codeql-analysis.yml
+├── .gitignore
+├── .pre-commit-config.yaml    # Pre-commit hooks
+├── pyproject.toml             # Project metadata and dependencies
+├── requirements.txt           # Python dependencies
+├── requirements-dev.txt       # Development dependencies
+├── setup.py                   # Package installation
+├── Makefile                   # Build automation
+├── Dockerfile                 # Docker configuration
+├── docker-compose.yml         # Docker Compose
+├── LICENSE                    # Apache 2.0 License
+└── README.md                  # This file
 ```
 
 🤝 Contributing
