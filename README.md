@@ -268,9 +268,9 @@ https://img.shields.io/badge/InfoQ-17A1E6?logo=infoq&logoColor=white
 
 Award Year Category
 GitHub Accelerator 2024 Top Open Source Project
-InfoWorld Bossie Award 2024 Best DevOps Tool
-DevOps Dozen 2023 Most Innovative
-Carbon Reduction Tech 2023 Green Computing
+InfoWorld Bossie Award 2025 Best DevOps Tool
+DevOps Dozen 2025 Most Innovative
+Carbon Reduction Tech 2025 Green Computing
 
 📚 Comprehensive Documentation
 
@@ -334,7 +334,8 @@ https://img.shields.io/badge/Slack-Join_Enterprise_Channel-4A154B?logo=slack
 📞 Contact & Partnerships
 
 <div align="center">
-
+Contact WhatsApp +226 02688902 
+  
 Sales: sales@ai-pts.dev | Support: support@ai-pts.dev | Partnerships: partners@ai-pts.dev
 
 https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin
