@@ -494,8 +494,9 @@ This project is licensed under the Apache License 2.0 - see the LICENSE file for
 
 · GitHub Issues: Bug reports & feature requests
 · Discord: Community support
-· Email: support@pts.dev
+· Email: Shadow_net.org@proton.me 
 · Twitter: @ai_pts
+. WhatsApp : +226 02688902 
 
 <div align="center">
 
