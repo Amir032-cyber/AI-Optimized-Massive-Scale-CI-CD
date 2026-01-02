@@ -1,0 +1,67 @@
+[tool.poetry]
+name = "pts"
+version = "0.1.0"
+description = "Enterprise-Grade CI/CD Optimization with Machine Learning"
+authors = ["AI Development Assistant <ai-assistant@pts.dev>"]
+license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/Amir032-cyber/AI-Optimized-Massive-Scale-CI-CD"
+repository = "https://github.com/Amir032-cyber/AI-Optimized-Massive-Scale-CI-CD"
+packages = [{include = "pts", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+fastapi = "^0.109.0"
+uvicorn = {extras = ["standard"], version = "^0.27.0"}
+pydantic = "^2.5.3"
+pandas = "^2.2.0"
+numpy = "^1.26.3"
+scikit-learn = "^1.4.0"
+xgboost = "^2.0.3"
+loguru = "^0.7.2"
+python-dotenv = "^1.0.1"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.4"
+pytest-cov = "^4.1.0"
+black = "^23.12.1"
+isort = "^5.10.1"
+mypy = "^1.8.0"
+pylint = "^3.0.4"
+pre-commit = "^3.6.0"
+flake8 = "^7.0.0"
+mkdocs = "^1.5.3"
+mkdocs-material = "^9.5.10"
+mkdocstrings = {extras = ["python"], version = "^0.24.0"}
+jupyter = "^1.0.0"
+ipykernel = "^6.29.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py39', 'py310', 'py311', 'py312']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 88
+
+[tool.mypy]
+python_version = "3.9"
+ignore_missing_imports = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "--cov=src/pts --cov-report=xml --cov-report=html"
+testpaths = ["tests"]

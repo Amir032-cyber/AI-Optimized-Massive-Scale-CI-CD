@@ -1,0 +1,36 @@
+[MASTER]
+# Specify a comma-separated list of plugins to load.
+load-plugins=pylint.extensions.typing
+
+[MESSAGES CONTROL]
+# Disable the given comma-separated list of checkers or messages.
+disable=
+    C0114, # Missing module docstring
+    C0115, # Missing class docstring
+    C0116, # Missing function or method docstring
+    R0903, # Too few public methods
+    R0913, # Too many arguments
+
+[FORMAT]
+# Maximum number of characters on a single line (default: 100)
+max-line-length=88
+
+[TYPECHECK]
+# List of members which are set dynamically and missed by pylint inference
+generated-members=
+    numpy.*,
+    pandas.*,
+    torch.*,
+    tensorflow.*
+
+[DESIGN]
+# Maximum number of arguments for function or method (default: 5)
+max-args=8
+
+[MISCELLANEOUS]
+# List of names to treat as constants, used to determine if a name is constant
+# and should be uppercase.
+const-names=
+    LOGGER,
+    LOG_LEVEL,
+    CONFIG_PATH

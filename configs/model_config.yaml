@@ -1,0 +1,29 @@
+# Configuration du Modèle de Sélection Prédictive des Tests (PTS)
+
+model_type: XGBClassifier
+
+# Paramètres spécifiques au modèle (XGBoost)
+model_params:
+  n_estimators: 200
+  max_depth: 5
+  learning_rate: 0.05
+  subsample: 0.8
+  colsample_bytree: 0.8
+  random_state: 42
+
+# Colonne cible dans les données d'entraînement
+target_column: test_failed
+
+# Seuil de probabilité pour la sélection des tests
+selection_threshold: 0.6
+
+# Chemin de sauvegarde du modèle
+model_save_path: models/latest_model.json
+
+# Caractéristiques à utiliser pour l'entraînement
+features:
+  - feature_churn
+  - feature_history
+  - feature_complexity
+  - developer_experience
+  - file_type_risk

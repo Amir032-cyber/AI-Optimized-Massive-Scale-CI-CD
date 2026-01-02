@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pts_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./configs:/app/configs
+      - ./scripts:/app/scripts
+    environment:
+      PYTHONPATH: /app/src
+      LOG_LEVEL: DEBUG
+      # Ajoutez ici d'autres variables d'environnement nécessaires (ex: secrets)
+    command: uvicorn pts.api.server:app --host 0.0.0.0 --port 8000 --reload
+
+  jupyter:
+    image: jupyter/scipy-notebook:latest
+    container_name: pts_jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/home/jovyan/work
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+    working_dir: /home/jovyan/work
+    command: start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''
+
+  # Service de base de données (exemple)
+  db:
+    image: postgres:15-alpine
+    container_name: pts_db
+    environment:
+      POSTGRES_USER: pts_user
+      POSTGRES_PASSWORD: pts_password
+      POSTGRES_DB: pts_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:
