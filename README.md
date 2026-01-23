@@ -3,14 +3,7 @@
 Enterprise-Grade CI/CD Optimization with Machine Learning
 
 https://github.com/Amir032-cyber/predictive-test-selection/actions/workflows/ci.yml/badge.svg
-https://img.shields.io/badge/license-Apache%202.0-blue.svg
-https://img.shields.io/badge/python-3.9%2B-blue
-https://img.shields.io/pypi/v/predictive-test-selection
-https://img.shields.io/docker/pulls/amir032cyber/predictive-test-selection
-https://img.shields.io/codecov/c/github/Amir032-cyber/predictive-test-selection
-https://img.shields.io/badge/docs-latest-brightgreen
-https://img.shields.io/discord/1234567890?label=discord&logo=discord&logoColor=white
-https://img.shields.io/twitter/follow/ai_pts?style=social
+
 
 <div align="center">
   <h3>The Open Source Implementation of Google/Meta's Predictive Test Selection</h3>
