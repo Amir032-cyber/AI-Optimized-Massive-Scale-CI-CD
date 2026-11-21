@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 setup(
     name="pts",
     version="0.1.0",
-    packages=find_packages(where="src"),
-    package_dir={"": "src"},
+    packages=find_packages(where="src") + ["scripts"],
+    package_dir={"": "src", "scripts": "scripts"},
     install_requires=[
         # Dépendances de production listées dans requirements.txt ou pyproject.toml
         # Pour la simplicité, on se base sur pyproject.toml
