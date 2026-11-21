@@ -84,7 +84,7 @@ def main() -> None:
         os.makedirs(output_dir, exist_ok=True)
         
         with open(args.output, "w") as f:
-            yaml.dump(pts_metrics, f, default_flow_style=False)
+            yaml.safe_dump(pts_metrics, f, default_flow_style=False, sort_keys=False)
             
         logger.success(f"Pipeline d'évaluation terminé. Métriques sauvegardées dans {args.output}")
         
