@@ -5,6 +5,8 @@ import numpy as np
 import pandas as pd
 from loguru import logger
 from sklearn.base import BaseEstimator
+from sklearn.exceptions import NotFittedError
+from sklearn.utils.validation import check_is_fitted
 from xgboost import XGBClassifier
 
 from pts.utils.logger import setup_logging
@@ -80,24 +82,27 @@ class PredictiveTestSelector:
         test_ids = features_df["test_id"]
         X = features_df.drop(columns=["test_id"], errors="ignore")
 
-        try:
-            # Simuler la prédiction si le modèle n'est pas entraîné
-            if not hasattr(self.model, "predict_proba"):
-                logger.warning("Modèle non entraîné. Simulation des probabilités.")
-                probabilities = np.random.rand(len(X))
-            else:
-                # La prédiction réelle
-                probabilities = self.model.predict_proba(X)[:, 1]  # Probabilité de la classe positive (échec)
+        if self.model is None:
+            logger.warning("Aucun modèle chargé. Tous les tests seront conservés.")
+            probabilities = np.ones(len(X), dtype=float)
+        else:
+            try:
+                check_is_fitted(self.model)
+                probabilities = self.model.predict_proba(X)[:, 1]
+            except NotFittedError:
+                # Sans modèle entraîné, réduire la suite serait dangereux.
+                logger.warning("Modèle non entraîné. Tous les tests seront conservés.")
+                probabilities = np.ones(len(X), dtype=float)
+            except Exception as e:
+                # En cas d'erreur du modèle, échouer en mode sûr et exécuter toute la suite.
+                logger.error(f"Erreur lors de la prédiction; conservation de tous les tests: {e}")
+                probabilities = np.ones(len(X), dtype=float)
 
-            results = pd.DataFrame(
-                {"test_id": test_ids, "failure_probability": probabilities}
-            )
-            logger.info(f"Prédiction effectuée pour {len(results)} tests.")
-            return results
-
-        except Exception as e:
-            logger.error(f"Erreur lors de la prédiction: {e}")
-            return pd.DataFrame(columns=["test_id", "failure_probability"])
+        results = pd.DataFrame(
+            {"test_id": test_ids, "failure_probability": probabilities}
+        )
+        logger.info(f"Prédiction effectuée pour {len(results)} tests.")
+        return results
 
     def select_tests(self, prediction_results: pd.DataFrame) -> List[str]:
         """
