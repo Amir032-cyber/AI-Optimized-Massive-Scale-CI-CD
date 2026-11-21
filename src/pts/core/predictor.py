@@ -6,7 +6,6 @@ import pandas as pd
 from loguru import logger
 from sklearn.base import BaseEstimator
 from sklearn.exceptions import NotFittedError
-from sklearn.utils.validation import check_is_fitted
 from xgboost import XGBClassifier
 
 from pts.utils.logger import setup_logging
@@ -87,7 +86,6 @@ class PredictiveTestSelector:
             probabilities = np.ones(len(X), dtype=float)
         else:
             try:
-                check_is_fitted(self.model)
                 probabilities = self.model.predict_proba(X)[:, 1]
             except NotFittedError:
                 # Sans modèle entraîné, réduire la suite serait dangereux.
