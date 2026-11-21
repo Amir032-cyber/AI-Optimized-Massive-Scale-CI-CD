@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Any, Dict, Optional
 
 import pandas as pd
@@ -90,12 +91,14 @@ class ModelTrainer:
             logger.warning("Aucun modèle à sauvegarder.")
             return
 
-        # Exemple de sauvegarde pour XGBoost
         try:
-            # self.model.save_model(path)
-            logger.info(f"Modèle sauvegardé (simulé) dans: {path}")
+            output_path = Path(path)
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            self.model.save_model(str(output_path))
+            logger.info(f"Modèle sauvegardé dans: {output_path}")
         except Exception as e:
             logger.error(f"Erreur lors de la sauvegarde du modèle: {e}")
+            raise
 
 
 if __name__ == "__main__":
