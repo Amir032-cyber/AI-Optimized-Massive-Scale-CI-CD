@@ -1,5 +1,6 @@
-from typing import Dict, Any
+from typing import Any, Dict, Optional
 
+import os
 import pandas as pd
 from loguru import logger
 
@@ -15,14 +16,14 @@ class DataProcessor:
     Gère le nettoyage, la transformation et la fusion des données brutes.
     """
 
-    def __init__(self, config: Dict[str, Any] = {}) -> None:
+    def __init__(self, config: Optional[Dict[str, Any]] = None) -> None:
         """
         Initialise le processeur de données.
 
         Args:
             config: Dictionnaire de configuration pour le traitement.
         """
-        self.config = config
+        self.config = {} if config is None else config
 
     def clean_and_transform_commits(self, commit_df: pd.DataFrame) -> pd.DataFrame:
         """
