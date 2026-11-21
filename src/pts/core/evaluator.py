@@ -61,11 +61,11 @@ class ModelEvaluator:
 
             # Calcul des métriques
             metrics = {
-                "accuracy": accuracy_score(y_true, y_pred),
-                "precision": precision_score(y_true, y_pred),
-                "recall": recall_score(y_true, y_pred),
-                "f1_score": f1_score(y_true, y_pred),
-                "roc_auc": roc_auc_score(y_true, y_proba),
+                "accuracy": float(accuracy_score(y_true, y_pred)),
+                "precision": float(precision_score(y_true, y_pred)),
+                "recall": float(recall_score(y_true, y_pred)),
+                "f1_score": float(f1_score(y_true, y_pred)),
+                "roc_auc": float(roc_auc_score(y_true, y_proba)),
             }
 
             logger.info("Résultats de l'évaluation:")
@@ -128,13 +128,13 @@ class ModelEvaluator:
         fpr = false_positives / total_selected if total_selected > 0 else 0.0
 
         pts_metrics = {
-            "total_tests": total_tests,
-            "total_failed": total_failed,
-            "total_selected": total_selected,
-            "detected_failures": detected_failures,
-            "test_reduction_rate": trr,
-            "defect_detection_rate": ddr,
-            "false_positive_rate": fpr,
+            "total_tests": int(total_tests),
+            "total_failed": int(total_failed),
+            "total_selected": int(total_selected),
+            "detected_failures": int(detected_failures),
+            "test_reduction_rate": float(trr),
+            "defect_detection_rate": float(ddr),
+            "false_positive_rate": float(fpr),
         }
 
         logger.info("Métriques PTS calculées:")
