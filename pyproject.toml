@@ -25,7 +25,7 @@ GitPython = "^3.1.43"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.4"
-httpx2 = "*"
+httpx = ">=0.24,<0.28"
 pytest-cov = "^4.1.0"
 black = "^23.12.1"
 isort = "^5.10.1"
