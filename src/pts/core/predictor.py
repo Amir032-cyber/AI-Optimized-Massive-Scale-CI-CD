@@ -1,4 +1,5 @@
 import logging
+from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 import numpy as np
@@ -49,18 +50,17 @@ class PredictiveTestSelector:
             Le modèle ML chargé.
         """
         logger.info(f"Chargement du modèle depuis {self.model_path}")
+        model = XGBClassifier()
+        model_path = Path(self.model_path)
+        if not model_path.is_file():
+            logger.warning("Aucun modèle sauvegardé trouvé. Le sélecteur conservera tous les tests.")
+            return model
+
         try:
-            # Exemple de chargement d'un modèle XGBoost
-            model = XGBClassifier()
-            # Dans un cas réel, on chargerait le modèle sauvegardé ici
-            # model.load_model(self.model_path)
-            logger.warning(
-                "Modèle par défaut initialisé. Le chargement réel du modèle est simulé."
-            )
+            model.load_model(str(model_path))
             return model
         except Exception as e:
             logger.error(f"Erreur lors du chargement du modèle: {e}")
-            # Retourne un modèle non entraîné par défaut en cas d'échec
             return XGBClassifier()
 
     def predict(self, features_df: pd.DataFrame) -> pd.DataFrame:
