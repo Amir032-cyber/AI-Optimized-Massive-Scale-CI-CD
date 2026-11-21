@@ -7,7 +7,7 @@ license = "Apache-2.0"
 readme = "README.md"
 homepage = "https://github.com/Amir032-cyber/AI-Optimized-Massive-Scale-CI-CD"
 repository = "https://github.com/Amir032-cyber/AI-Optimized-Massive-Scale-CI-CD"
-packages = [{include = "pts", from = "src"}]
+packages = [{include = "pts", from = "src"}, {include = "scripts"}]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.13"
